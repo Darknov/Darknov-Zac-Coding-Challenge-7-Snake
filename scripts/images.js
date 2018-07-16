@@ -1,0 +1,1 @@
+export const boxImg = document.getElementById("box");
