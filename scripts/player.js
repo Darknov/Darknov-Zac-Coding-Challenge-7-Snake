@@ -51,8 +51,8 @@ export const player = {
 		}
 
     const proportion = {
-      x: abs(mouseDistance.x) / (abs(mouseDistance.x) + abs(mouseDistance.y)),
-      y: abs(mouseDistance.y) / ( abs(mouseDistance.x) +  abs(mouseDistance.y))
+      x: abs(Math.sin(Math.atan2(mouseDistance.x, mouseDistance.y))),
+      y: abs(Math.cos(Math.atan2(mouseDistance.x, mouseDistance.y)))
     }
 
 		if(toMouseVelocity.x > 0) {
