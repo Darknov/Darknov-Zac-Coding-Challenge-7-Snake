@@ -5,7 +5,6 @@ import { player } from './player.js';
 
 
 
-
 function render() {
 	clearCanvas();
 	player.render();
