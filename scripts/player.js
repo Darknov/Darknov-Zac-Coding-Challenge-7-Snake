@@ -1,12 +1,22 @@
 import { context } from './canvas.js';
 import { mouse } from './mouse.js';
 import { boxImg } from './images.js';
+import CONSTANTS from './constants.js';
+import { abs } from './utils.js'
+
+export class PlayerPart {
+  constructor(x,y,r) {
+    this.x = x;
+    this.y = y;
+    this.r = r;
+  }
+}
 
 export const player = {
 	x: 0,
 	y: 0,
 	velocity: {x:0, y:0},
-	boxes: [{x:0, y:0}, {x:0, y:0}, {x:0, y:0}, {x:0, y:0}],
+	boxes: [new PlayerPart(0,0,0)],
 	render: function() {
 		for(let i = 0; i < this.boxes.length; i++) {
 			context.save();
@@ -28,28 +38,35 @@ export const player = {
 		}
 	},
 	update: function() {
-		// max velocity that snake can travel with
-		// temporary
-		// we will have to calculate sin or cos to
-		// get real max velocity
-		let maxVelocity = {x: 5, y: 5};
 		// velocity with mouse to 'smoothen' travel to mouse
-		let toMouseVelocity = {
-			x: (mouse.x - 24 - this.boxes[0].x)/5,
-			y: (mouse.y - 12 - this.boxes[0].y)/5
+
+    const mouseDistance = {
+      x: (mouse.x - 24 - this.boxes[0].x),
+      y: (mouse.y - 12 - this.boxes[0].y)
+    }
+
+    let toMouseVelocity = {
+			x: mouseDistance.x/5,
+			y: mouseDistance.y/5
 		}
+
+    const proportion = {
+      x: abs(mouseDistance.x) / (abs(mouseDistance.x) + abs(mouseDistance.y)),
+      y: abs(mouseDistance.y) / ( abs(mouseDistance.x) +  abs(mouseDistance.y))
+    }
+
 		if(toMouseVelocity.x > 0) {
-			this.velocity.x = maxVelocity.x > toMouseVelocity.x ? toMouseVelocity.x : maxVelocity.x;
+			this.velocity.x = CONSTANTS.maxVelocity * proportion.x > toMouseVelocity.x ? toMouseVelocity.x : CONSTANTS.maxVelocity * proportion.x;
 		} else {
-			this.velocity.x = maxVelocity.x > -toMouseVelocity.x ? toMouseVelocity.x : -maxVelocity.x;
+			this.velocity.x = CONSTANTS.maxVelocity * proportion.x > -toMouseVelocity.x ? toMouseVelocity.x : -CONSTANTS.maxVelocity * proportion.x;
 		}
 		
 		if(toMouseVelocity.y > 0) {
-			this.velocity.y = maxVelocity.y > toMouseVelocity.y ? toMouseVelocity.y : maxVelocity.y;
+			this.velocity.y = CONSTANTS.maxVelocity * proportion.y > toMouseVelocity.y ? toMouseVelocity.y : CONSTANTS.maxVelocity * proportion.y;
 		} else {
-			this.velocity.y = maxVelocity.y > -toMouseVelocity.y ? toMouseVelocity.y : -maxVelocity.y;
+			this.velocity.y = CONSTANTS.maxVelocity * proportion.y > -toMouseVelocity.y ? toMouseVelocity.y : -CONSTANTS.maxVelocity * proportion.y;
 		}
-		
+
 		this.boxes[0].x += this.velocity.x;
 		this.boxes[0].y += this.velocity.y;
 
