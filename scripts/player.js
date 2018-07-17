@@ -20,7 +20,7 @@ export const player = {
 	velocity: {x:0, y:0},
 	boxes: [new PlayerPart(0,0,0)],
 	render: function() {
-		for(let i = 0; i < this.boxes.length; i++) {
+		for(let i = this.boxes.length - 1; i >= 0; i--) {
 			context.save();
 			context.beginPath();
 			context.translate( this.boxes[i].x + 12, this.boxes[i].y + 12 );
