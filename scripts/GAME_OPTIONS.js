@@ -1,7 +1,7 @@
 export const CONSTANTS = {
 	maxVelocity: 5,
   appleGenerationInterval: 1000,
-  eatingTime: 100,
+  eatingTime: 70,
   eatingSizeX: 1.2,
   eatingSizeY: 1.2
 }
