@@ -3,19 +3,20 @@ import { mouse } from './mouse.js';
 import { box } from './images.js';
 import CONSTANTS from './constants.js';
 import { abs } from './utils.js'
-import { apple } from './images.js';
-
+import { apples } from './apples.js';
 export class PlayerPart {
   constructor(x,y,r) {
     this.x = x;
     this.y = y;
     this.r = r;
+    this.img = box;
   }
 }
 
 export const player = {
 	x: 0,
 	y: 0,
+  img: box,
 	velocity: {x:0, y:0},
 	boxes: [new PlayerPart(0,0,0)],
 	render: function() {
@@ -34,7 +35,7 @@ export const player = {
 				rotation = Math.atan2(this.boxes[i-1].y - this.boxes[i].y, this.boxes[i-1].x - this.boxes[i].x)
 			}
 			context.rotate(rotation);
-			context.drawImage(box, -12, -12);
+			context.drawImage(this.img, -12, -12);
 			context.restore();
 		}
 	},
@@ -76,5 +77,22 @@ export const player = {
 			this.boxes[i].x += (this.boxes[i-1].x + attachPointX - this.boxes[i].x)/2;
 			this.boxes[i].y += (this.boxes[i-1].y + attachPointY - this.boxes[i].y)/2;
 		}
+    for(let i = 0; i < apples.length; i++) {
+      if(checkCollision(this.boxes[0], apples[i])) {
+        const {x, y} =  this.boxes[this.boxes.length - 1];
+        this.boxes.push(new PlayerPart(x, y));
+        apples.splice(i, 1);
+        i--;
+      }
+    }
 	}
+}
+
+function checkCollision(player, object) {
+  return !(
+      ((player.y + player.img.height) < (object.y)) ||
+      (player.y > (object.y + object.img.height)) ||
+      ((player.x + player.img.width) < object.x) ||
+      (player.x > (object.x + object.img.width))
+  );
 }

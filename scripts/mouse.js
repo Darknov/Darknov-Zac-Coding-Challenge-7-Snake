@@ -5,17 +5,6 @@ export const mouse = {
 	y: 0
 }
 
-
-/* example of using getmousepos
-function draw(e) {
-    var pos = getMousePos(canvas, e);
-    posx = pos.x;
-    posy = pos.y;
-	context.drawImage(boxImg, posx, posy);
-}
-window.addEventListener('mousemove', draw, false);
-*/
-
 // getting mouse position on canvas
 function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
