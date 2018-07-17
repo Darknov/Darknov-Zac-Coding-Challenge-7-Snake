@@ -58,6 +58,7 @@ export const player = {
       for(let j = 0; j < traps.length; j++) {
         if(isCollision(this.boxes[i], traps[j], 10, 10)) {
           this.death();
+          break;
         }
       }
     }
