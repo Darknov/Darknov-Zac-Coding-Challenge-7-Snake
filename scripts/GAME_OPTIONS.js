@@ -7,3 +7,12 @@ export const PLAYER = {
   score: 0
 }
 
+export const changeScore = (score) => {
+  PLAYER.score = score;
+  console.log(score);
+  document.getElementById("score").textContent = PLAYER.score;
+}
+
+export const addPoint = () => {
+  changeScore(++PLAYER.score);
+}

@@ -1,7 +1,7 @@
 import { context } from './canvas.js';
 import { mouse } from './mouse.js';
 import { box } from './images.js';
-import { CONSTANTS, PLAYER } from './GAME_OPTIONS.js';
+import { CONSTANTS, changeScore, addPoint } from './GAME_OPTIONS.js';
 import { abs, isCollision } from './utils.js'
 import { apples } from './apples.js';
 import { traps } from './traps.js';
@@ -65,13 +65,13 @@ export const player = {
   eatsApple: function() {
     const {x, y} =  this.boxes[this.boxes.length - 1];
     this.boxes.push(new PlayerPart(x, y));
-    PLAYER.score++;
+    addPoint();
   },
   death: function() {
     this.boxes.splice(1, this.boxes.length - 1);
     this.boxes[0].x = 50;
     this.boxes[0].y = 50;
-    PLAYER.score = 0;
+    changeScore(0);
   },
   moveHead: function() {
     const mouseDistance = {
