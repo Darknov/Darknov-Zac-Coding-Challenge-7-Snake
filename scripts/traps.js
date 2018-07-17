@@ -12,7 +12,10 @@ class Trap {
 export const traps = [];
 let lastGenerationTime = Date.now();
 traps.push(new Trap(canvas.width/2 - trap.width/2,canvas.height/2 - trap.height/2));
-
+traps.push(new Trap(canvas.width/4 - trap.width/2,canvas.height/4 - trap.height/2));
+traps.push(new Trap(canvas.width/1.3 - trap.width/2,canvas.height/1.3 - trap.height/2));
+traps.push(new Trap(canvas.width/1.3 - trap.width/2,canvas.height/4 - trap.height/2));
+traps.push(new Trap(canvas.width/4 - trap.width/2,canvas.height/1.3 - trap.height/2));
 export function update() {
 
 }
