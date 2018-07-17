@@ -47,7 +47,7 @@ export const player = {
     this.moveTail();
 
     for(let i = 0; i < apples.length; i++) {
-      if(isCollision(this.boxes[0], apples[i])) {
+      if(isCollision(this.boxes[0], apples[i], 5, 5)) {
         this.eatsApple();
         apples.splice(i, 1);
         i--;
@@ -56,7 +56,7 @@ export const player = {
 
     for(let i = 0; i < this.boxes.length; i++) {
       for(let j = 0; j < traps.length; j++) {
-        if(isCollision(this.boxes[i], traps[j])) {
+        if(isCollision(this.boxes[i], traps[j], 10, 10)) {
           this.death();
         }
       }
