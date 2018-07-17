@@ -14,6 +14,9 @@ export class PlayerPart {
   }
 }
 
+const eatingOrder = [];
+let eatingTime = Date.now();
+
 export const player = {
 	x: 0,
 	y: 0,
@@ -38,6 +41,11 @@ export const player = {
 			}
       this.boxes[i].r = rotation;
 			context.rotate(this.boxes[i].r);
+      for(let j = 0; j < eatingOrder.length; j++) {
+        if(eatingOrder[j] === i) {
+          context.scale(CONSTANTS.eatingSizeX, CONSTANTS.eatingSizeY);
+        }
+      }
 			context.drawImage(this.img, -12, -12);
 			context.restore();
 		}
@@ -62,10 +70,16 @@ export const player = {
         }
       }
     }
+
+    if(eatingTime + CONSTANTS.eatingTime < Date.now()) {
+      this.moveApplesDeeper();
+    }
+
 	},
   eatsApple: function() {
     const {x, y} =  this.boxes[this.boxes.length - 1];
     this.boxes.push(new PlayerPart(x, y));
+    eatingOrder.push(0);
     addPoint();
   },
   death: function() {
@@ -110,6 +124,16 @@ export const player = {
       this.boxes[i].x += (this.boxes[i-1].x - this.boxes[i].x)/5 * (abs(this.velocity.x) + abs(this.velocity.y)) / 5;
       this.boxes[i].y += (this.boxes[i-1].y - this.boxes[i].y)/5 * (abs(this.velocity.x) + abs(this.velocity.y)) / 5;
     }
+  },
+  moveApplesDeeper: function() {
+    for(let i = 0; i < eatingOrder.length; i++) {
+      eatingOrder[i]++;
+      if(eatingOrder[i] > this.boxes.length - 1) {
+        eatingOrder.splice(i, 1);
+        i--;
+      }
+    }
+    eatingTime = Date.now();
   }
 }
 

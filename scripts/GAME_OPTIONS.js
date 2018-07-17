@@ -1,6 +1,9 @@
 export const CONSTANTS = {
 	maxVelocity: 5,
   appleGenerationInterval: 1000,
+  eatingTime: 100,
+  eatingSizeX: 1.2,
+  eatingSizeY: 1.2
 }
 
 export const PLAYER = {
