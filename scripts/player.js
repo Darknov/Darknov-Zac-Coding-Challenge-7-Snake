@@ -30,11 +30,13 @@ export const player = {
 			// so there is no instant rotation to the next box
 			let rotation = 0;
 			if(i == 0) {
-				rotation = Math.atan2(mouse.y - this.boxes[i].y - 12, mouse.x - this.boxes[i].x - 12)
+				rotation = Math.atan2(mouse.y - this.boxes[i].y - 12, mouse.x - this.boxes[i].x - 12);
+        
 			} else {
-				rotation = Math.atan2(this.boxes[i-1].y - this.boxes[i].y, this.boxes[i-1].x - this.boxes[i].x)
+				rotation = Math.atan2(this.boxes[i-1].y - this.boxes[i].y, this.boxes[i-1].x - this.boxes[i].x);
 			}
-			context.rotate(rotation);
+      this.boxes[i].r = rotation;
+			context.rotate(this.boxes[i].r);
 			context.drawImage(this.img, -12, -12);
 			context.restore();
 		}
@@ -72,10 +74,8 @@ export const player = {
 		this.boxes[0].x += this.velocity.x;
 		this.boxes[0].y += this.velocity.y;
 		for(let i = 1; i < this.boxes.length; i++) {
-			let attachPointX = this.velocity.x >= 0 ? -12 : 12;
-			let attachPointY = this.velocity.y >= 0 ? -12 : 12;
-			this.boxes[i].x += (this.boxes[i-1].x + attachPointX - this.boxes[i].x)/2;
-			this.boxes[i].y += (this.boxes[i-1].y + attachPointY - this.boxes[i].y)/2;
+			this.boxes[i].x += (this.boxes[i-1].x - this.boxes[i].x)/5 * (abs(this.velocity.x) + abs(this.velocity.y)) / 5;
+			this.boxes[i].y += (this.boxes[i-1].y - this.boxes[i].y)/5 * (abs(this.velocity.x) + abs(this.velocity.y)) / 5;
 		}
     for(let i = 0; i < apples.length; i++) {
       if(checkCollision(this.boxes[0], apples[i])) {
