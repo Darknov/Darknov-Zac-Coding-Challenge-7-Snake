@@ -1,8 +1,9 @@
 import { context } from './canvas.js';
 import { mouse } from './mouse.js';
-import { boxImg } from './images.js';
+import { box } from './images.js';
 import CONSTANTS from './constants.js';
 import { abs } from './utils.js'
+import { apple } from './images.js';
 
 export class PlayerPart {
   constructor(x,y,r) {
@@ -33,7 +34,7 @@ export const player = {
 				rotation = Math.atan2(this.boxes[i-1].y - this.boxes[i].y, this.boxes[i-1].x - this.boxes[i].x)
 			}
 			context.rotate(rotation);
-			context.drawImage(boxImg, -12, -12);
+			context.drawImage(box, -12, -12);
 			context.restore();
 		}
 	},
@@ -69,7 +70,6 @@ export const player = {
 
 		this.boxes[0].x += this.velocity.x;
 		this.boxes[0].y += this.velocity.y;
-
 		for(let i = 1; i < this.boxes.length; i++) {
 			let attachPointX = this.velocity.x >= 0 ? -12 : 12;
 			let attachPointY = this.velocity.y >= 0 ? -12 : 12;
