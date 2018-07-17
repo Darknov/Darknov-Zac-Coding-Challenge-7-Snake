@@ -11,7 +11,7 @@ class Apple {
 	}
 }
 
-const apples = [];
+export const apples = [];
 let lastGenerationTime = Date.now();
 apples.push(new Apple(50,50));
 
