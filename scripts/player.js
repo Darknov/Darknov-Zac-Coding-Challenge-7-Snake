@@ -1,9 +1,10 @@
 import { context } from './canvas.js';
 import { mouse } from './mouse.js';
 import { box } from './images.js';
-import CONSTANTS from './constants.js';
-import { abs } from './utils.js'
+import { CONSTANTS, PLAYER } from './GAME_OPTIONS.js';
+import { abs, isCollision } from './utils.js'
 import { apples } from './apples.js';
+import { traps } from './traps.js';
 export class PlayerPart {
   constructor(x,y,r) {
     this.x = x;
@@ -42,57 +43,72 @@ export const player = {
 		}
 	},
 	update: function() {
-		// velocity with mouse to 'smoothen' travel to mouse
+    this.moveHead();
+    this.moveTail();
 
+    for(let i = 0; i < apples.length; i++) {
+      if(isCollision(this.boxes[0], apples[i])) {
+        this.eatsApple();
+        apples.splice(i, 1);
+        i--;
+      }
+    }
+
+    for(let i = 0; i < this.boxes.length; i++) {
+      for(let j = 0; j < traps.length; j++) {
+        if(isCollision(this.boxes[i], traps[j])) {
+          this.death();
+        }
+      }
+    }
+	},
+  eatsApple: function() {
+    const {x, y} =  this.boxes[this.boxes.length - 1];
+    this.boxes.push(new PlayerPart(x, y));
+    PLAYER.score++;
+  },
+  death: function() {
+    this.boxes.splice(1, this.boxes.length - 1);
+    this.boxes[0].x = 50;
+    this.boxes[0].y = 50;
+    PLAYER.score = 0;
+  },
+  moveHead: function() {
     const mouseDistance = {
       x: (mouse.x - 24 - this.boxes[0].x),
       y: (mouse.y - 12 - this.boxes[0].y)
     }
 
     let toMouseVelocity = {
-			x: mouseDistance.x/5,
-			y: mouseDistance.y/5
-		}
+      x: mouseDistance.x/5,
+      y: mouseDistance.y/5
+    }
 
     const proportion = {
       x: abs(Math.sin(Math.atan2(mouseDistance.x, mouseDistance.y))),
       y: abs(Math.cos(Math.atan2(mouseDistance.x, mouseDistance.y)))
     }
 
-		if(toMouseVelocity.x > 0) {
-			this.velocity.x = CONSTANTS.maxVelocity * proportion.x > toMouseVelocity.x ? toMouseVelocity.x : CONSTANTS.maxVelocity * proportion.x;
-		} else {
-			this.velocity.x = CONSTANTS.maxVelocity * proportion.x > -toMouseVelocity.x ? toMouseVelocity.x : -CONSTANTS.maxVelocity * proportion.x;
-		}
-		
-		if(toMouseVelocity.y > 0) {
-			this.velocity.y = CONSTANTS.maxVelocity * proportion.y > toMouseVelocity.y ? toMouseVelocity.y : CONSTANTS.maxVelocity * proportion.y;
-		} else {
-			this.velocity.y = CONSTANTS.maxVelocity * proportion.y > -toMouseVelocity.y ? toMouseVelocity.y : -CONSTANTS.maxVelocity * proportion.y;
-		}
-
-		this.boxes[0].x += this.velocity.x;
-		this.boxes[0].y += this.velocity.y;
-		for(let i = 1; i < this.boxes.length; i++) {
-			this.boxes[i].x += (this.boxes[i-1].x - this.boxes[i].x)/5 * (abs(this.velocity.x) + abs(this.velocity.y)) / 5;
-			this.boxes[i].y += (this.boxes[i-1].y - this.boxes[i].y)/5 * (abs(this.velocity.x) + abs(this.velocity.y)) / 5;
-		}
-    for(let i = 0; i < apples.length; i++) {
-      if(checkCollision(this.boxes[0], apples[i])) {
-        const {x, y} =  this.boxes[this.boxes.length - 1];
-        this.boxes.push(new PlayerPart(x, y));
-        apples.splice(i, 1);
-        i--;
-      }
+    if(toMouseVelocity.x > 0) {
+      this.velocity.x = CONSTANTS.maxVelocity * proportion.x > toMouseVelocity.x ? toMouseVelocity.x : CONSTANTS.maxVelocity * proportion.x;
+    } else {
+      this.velocity.x = CONSTANTS.maxVelocity * proportion.x > -toMouseVelocity.x ? toMouseVelocity.x : -CONSTANTS.maxVelocity * proportion.x;
     }
-	}
+    
+    if(toMouseVelocity.y > 0) {
+      this.velocity.y = CONSTANTS.maxVelocity * proportion.y > toMouseVelocity.y ? toMouseVelocity.y : CONSTANTS.maxVelocity * proportion.y;
+    } else {
+      this.velocity.y = CONSTANTS.maxVelocity * proportion.y > -toMouseVelocity.y ? toMouseVelocity.y : -CONSTANTS.maxVelocity * proportion.y;
+    }
+
+    this.boxes[0].x += this.velocity.x;
+    this.boxes[0].y += this.velocity.y;
+  },
+  moveTail: function() {
+    for(let i = 1; i < this.boxes.length; i++) {
+      this.boxes[i].x += (this.boxes[i-1].x - this.boxes[i].x)/5 * (abs(this.velocity.x) + abs(this.velocity.y)) / 5;
+      this.boxes[i].y += (this.boxes[i-1].y - this.boxes[i].y)/5 * (abs(this.velocity.x) + abs(this.velocity.y)) / 5;
+    }
+  }
 }
 
-function checkCollision(player, object) {
-  return !(
-      ((player.y + player.img.height) < (object.y)) ||
-      (player.y > (object.y + object.img.height)) ||
-      ((player.x + player.img.width) < object.x) ||
-      (player.x > (object.x + object.img.width))
-  );
-}

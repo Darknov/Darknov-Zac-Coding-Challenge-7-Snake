@@ -1,6 +1,6 @@
 import { apple } from './images.js';
 import { canvas, draw } from './canvas.js';
-import CONSTANTS from './constants.js';
+import { CONSTANTS } from './GAME_OPTIONS.js';
 import { getRandomInt } from './utils.js';
 
 class Apple {
