@@ -87,6 +87,7 @@ export const player = {
     this.boxes[0].x = 50;
     this.boxes[0].y = 50;
     changeScore(0);
+    apples.splice(0, apples.length);
   },
   moveHead: function() {
     const mouseDistance = {
