@@ -1,6 +1,6 @@
 const CONSTANTS = {
 	maxVelocity: 5,
-  appleGenerationInterval: 3000,
+  appleGenerationInterval: 1000,
 }
 
 export default CONSTANTS;
