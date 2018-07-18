@@ -1,3 +1,9 @@
+@font-face {
+	font-family: Games;
+	src: url(./Games.ttf);
+}
+
+
 canvas {
 	border:1px solid #000000;
 }
