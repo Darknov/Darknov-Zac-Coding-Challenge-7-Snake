@@ -39,11 +39,12 @@ html {
 canvas {
 	border: 10px solid #000000;
 	border-radius: 15px;
-	background-color: #FFCF6F;
+	background-image: url('../assets/sand.png');
+	background-repeat: repeat;
 	display: flex;
 	margin: auto;
 	margin-top: 90px;
-	opacity: .9;
+	opacity: .95;
 }
 
 img {

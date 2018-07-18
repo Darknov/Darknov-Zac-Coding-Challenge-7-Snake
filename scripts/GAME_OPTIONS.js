@@ -4,7 +4,8 @@ export const CONSTANTS = {
   eatingTime: 70,
   eatingSizeX: 1.2,
   eatingSizeY: 1.2,
-  headToMouseMinDistance: 40
+  headToMouseMinDistance: 40,
+  maxApples: 30
 }
 
 export const PLAYER = {
