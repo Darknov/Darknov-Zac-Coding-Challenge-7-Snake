@@ -16,7 +16,7 @@ let lastGenerationTime = Date.now();
 apples.push(new Apple(50,50));
 
 export function update() {
-  if(lastGenerationTime + CONSTANTS.appleGenerationInterval < Date.now()) {
+  if(lastGenerationTime + CONSTANTS.appleGenerationInterval < Date.now() && apples.length < CONSTANTS.maxApples) {
     const generatedApple = new Apple(
       getRandomInt(apple.width, canvas.width - apple.width), 
       getRandomInt(apple.height, canvas.height - apple.height)
