@@ -1,0 +1,3 @@
+startButton.addEventListener("click",() => {
+	
+	newGame();

@@ -1,15 +1,18 @@
 @font-face {
 	font-family: Games;
-	src: url(Games.ttf);
+	src: url('/css/Fonts/Games.ttf');
 }
 
 label {
 	font-family: Games;
-	font-size: 14px;
+	font-size: 90px;
+	display: flex;
 }
 
-body {
-	background-image: url(bg.jpg); 
+html {
+	background-image: url('/assets/bg.jpg'); 
+	background-repeat: no-repeat;
+	background-size: auto;
 }
 
 canvas {
