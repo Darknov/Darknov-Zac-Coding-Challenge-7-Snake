@@ -3,6 +3,9 @@ const PATH_TO_SOUNDS = '../sounds/';
 function createAudio(src, volume = 0.1, loop = false) {
   var audio = document.createElement('audio');
   audio.volume = volume;
+  audio.setAttribute("preload", "auto");
+  audio.setAttribute("controls", "none");
+  audio.style.display = "none";
   audio.loop = loop;
   audio.src    = src;
   return audio;
