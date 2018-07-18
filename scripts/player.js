@@ -36,7 +36,7 @@ export const player = {
 			// so there is no instant rotation to the next box
 			let rotation = 0;
 			if(i == 0) {
-				rotation = Math.atan2(mouse.y - this.boxes[i].y - 12, mouse.x - this.boxes[i].x - 12);
+				rotation = Math.atan2(mouse.y - this.boxes[i].y - this.img2.height/2, mouse.x - this.boxes[i].x - this.img2.width/2);
         
 			} else {
 				rotation = Math.atan2(this.boxes[i-1].y - this.boxes[i].y, this.boxes[i-1].x - this.boxes[i].x);
@@ -49,12 +49,12 @@ export const player = {
         }
       }
       if(i === 0) {
-        context.drawImage(this.img2, -12, -14);
+        context.drawImage(this.img2, -this.img2.width/2, -this.img2.height/2);
       }
       else if(i === this.boxes.length - 1){
-        context.drawImage(this.img3, -12, -14);
+        context.drawImage(this.img3, -this.img3.width/2, -this.img3.height/2);
       } else {
-        context.drawImage(this.img, -12, -12);
+        context.drawImage(this.img, -this.img.width/2, -this.img.height/2);
       }
 			
 			context.restore();
@@ -101,8 +101,8 @@ export const player = {
   },
   moveHead: function() {
     const mouseDistance = {
-      x: (mouse.x - 24 - this.boxes[0].x),
-      y: (mouse.y - 12 - this.boxes[0].y)
+      x: (mouse.x - this.img2.width - this.boxes[0].x),
+      y: (mouse.y - this.img2.height - this.boxes[0].y)
     }
 
     let toMouseVelocity = {
