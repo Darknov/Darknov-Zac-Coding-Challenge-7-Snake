@@ -8,7 +8,6 @@ export const yummy = document.getElementById("yummy");
 export const fruits = [apple];
 
 for(let i = 1; i <= 16; i++) {
-  const img = new Image();
-  img.src = "./../assets/fruit" + i + ".png";
+  const img = document.getElementById("fruit" + i);
   fruits.push(img);
 }
