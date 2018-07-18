@@ -3,7 +3,7 @@ import { canvas, context, clearCanvas } from './canvas.js';
 import { player } from './player.js';
 import * as apples from './apples.js';
 import * as traps from './traps.js';
-import { music } from './audio.js';
+import { music, eat } from './audio.js';
 
 window.addEventListener('load', function () {
   startGame();
@@ -11,6 +11,8 @@ window.addEventListener('load', function () {
 
 function startGame() {
   requestAnimationFrame(frame)
+  music.muted = false;
+  eat.muted = false;
   music.play();
 }
 // fuction that draws everything we need

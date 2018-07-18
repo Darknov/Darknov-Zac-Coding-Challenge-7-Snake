@@ -7,6 +7,7 @@ function createAudio(src, volume = 0.1, loop = false) {
   audio.setAttribute("controls", "none");
   audio.style.display = "none";
   audio.loop = loop;
+  audio.muted = true;
   return audio;
 }
 
