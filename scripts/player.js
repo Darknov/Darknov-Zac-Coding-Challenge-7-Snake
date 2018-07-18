@@ -1,16 +1,16 @@
 import { context } from './canvas.js';
 import { mouse } from './mouse.js';
-import { box, head } from './images.js';
+import { box, head, tail } from './images.js';
 import { CONSTANTS, changeScore, addPoint } from './GAME_OPTIONS.js';
 import { abs, isCollision } from './utils.js'
 import { apples } from './apples.js';
 import { traps } from './traps.js';
 export class PlayerPart {
-  constructor(x,y,r) {
+  constructor(x,y,r,img = box) {
     this.x = x;
     this.y = y;
     this.r = r;
-    this.img = box;
+    this.img = img;
   }
 }
 
@@ -22,8 +22,9 @@ export const player = {
 	y: 0,
   img: box,
   img2: head,
+  img3: tail,
 	velocity: {x:0, y:0},
-	boxes: [new PlayerPart(0,0,0)],
+	boxes: [new PlayerPart(0,0,0,head)],
 	render: function() {
 		for(let i = this.boxes.length - 1; i >= 0; i--) {
 			context.save();
@@ -47,10 +48,13 @@ export const player = {
           context.scale(CONSTANTS.eatingSizeX, CONSTANTS.eatingSizeY);
         }
       }
-      if(i != 0){
-        context.drawImage(this.img, -12, -12);
-      } else {
+      if(i === 0) {
         context.drawImage(this.img2, -12, -14);
+      }
+      else if(i === this.boxes.length - 1){
+        context.drawImage(this.img3, -12, -14);
+      } else {
+        context.drawImage(this.img, -12, -12);
       }
 			
 			context.restore();
