@@ -1,5 +1,49 @@
+@font-face {
+	font-family: Games;
+	src: url('/css/Fonts/Games.ttf');
+}
+
+.user {
+	background: #02000C;
+	padding-top: 20px;
+	display: flex;
+	margin: auto;
+	justify-content: center;
+	width: 1030px;
+	border: 5px solid white;
+	border-radius: 5px;
+
+}
+
+.userscore {
+	display: flex;
+	color: #04D0D0;
+}
+
+.username {
+	padding-left: 50px;
+	color: #04D0D0;
+}
+
+body {
+	font-family: Games;
+	font-size: 80px;
+}
+
+html {
+	background-image: url('/assets/bg.jpg'); 
+	background-repeat: no-repeat;
+	background-size: auto;
+}
+
 canvas {
-	border:1px solid #000000;
+	border: 10px solid #000000;
+	border-radius: 15px;
+	background-color: #FFCF6F;
+	display: flex;
+	margin: auto;
+	margin-top: 90px;
+	opacity: .9;
 }
 
 img {
