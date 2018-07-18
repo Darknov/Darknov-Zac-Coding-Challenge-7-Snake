@@ -11,5 +11,22 @@ function createAudio(src, volume = 0.1, loop = false) {
   return audio;
 }
 
-export const eat = createAudio('eat');
+export const eat = {
+  sources: [createAudio('eat'), createAudio('eat1'), createAudio('eat2'), createAudio('eat3')],
+  play: function() {
+    for (const source of this.sources) {
+      if(source.paused) {
+        source.play();
+        break;
+      }
+    }
+  },
+  unmute: function() {
+    for (const source of this.sources) {
+      source.muted = false;
+    }
+  }
+
+
+}
 export const music = createAudio('music', 0.1, true);

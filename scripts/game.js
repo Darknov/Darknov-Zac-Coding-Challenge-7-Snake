@@ -8,7 +8,7 @@ import { music, eat } from './audio.js';
 export function startGame() {
   requestAnimationFrame(frame)
   music.muted = false;
-  eat.muted = false;
+  eat.unmute();
   music.play();
 }
 // fuction that draws everything we need
