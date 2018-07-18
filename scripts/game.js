@@ -3,10 +3,11 @@ import { canvas, context, clearCanvas } from './canvas.js';
 import { player } from './player.js';
 import * as apples from './apples.js';
 import * as traps from './traps.js';
-import { music, eat } from './audio.js';
+import { music, eat, hit } from './audio.js';
 
 export function startGame() {
   requestAnimationFrame(frame)
+  hit.muted = false;
   music.muted = false;
   eat.unmute();
   music.play();

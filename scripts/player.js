@@ -5,7 +5,7 @@ import { CONSTANTS, changeScore, addPoint } from './GAME_OPTIONS.js';
 import { abs, isCollision } from './utils.js'
 import { apples } from './apples.js';
 import { traps } from './traps.js';
-import { eat } from './audio.js';
+import { eat, hit } from './audio.js';
 export class PlayerPart {
   constructor(x,y,r,img = box) {
     this.x = x;
@@ -95,6 +95,7 @@ export const player = {
     eat.play();
   },
   death: function() {
+    hit.play();
     this.boxes.splice(1, this.boxes.length - 1);
     this.boxes[0].x = 50;
     this.boxes[0].y = 50;

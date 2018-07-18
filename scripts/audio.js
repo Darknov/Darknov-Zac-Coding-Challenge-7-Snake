@@ -30,3 +30,4 @@ export const eat = {
 
 }
 export const music = createAudio('music', 0.1, true);
+export const hit = createAudio('hit');
