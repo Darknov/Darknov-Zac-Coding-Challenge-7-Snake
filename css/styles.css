@@ -3,10 +3,30 @@
 	src: url('/css/Fonts/Games.ttf');
 }
 
-label {
-	font-family: Games;
-	font-size: 90px;
+.user {
+	background: #02000C;
 	display: flex;
+	margin: auto;
+	justify-content: center;
+	width: 1032px;
+
+}
+
+.userscore {
+	font-size: 80px;
+	display: flex;
+	color: #04D0D0;
+}
+
+.username {
+	padding-left: 50px;
+	font-size: 80px;
+	color: #04D0D0;
+}
+
+body {
+	font-family: Games;
+
 }
 
 html {
@@ -21,6 +41,7 @@ canvas {
 	display: flex;
 	margin: auto;
 	margin-top: 90px;
+	opacity: .9;
 }
 
 img {
