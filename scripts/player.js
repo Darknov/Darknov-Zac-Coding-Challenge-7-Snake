@@ -5,6 +5,7 @@ import { CONSTANTS, changeScore, addPoint } from './GAME_OPTIONS.js';
 import { abs, isCollision } from './utils.js'
 import { apples } from './apples.js';
 import { traps } from './traps.js';
+import { eat } from './audio.js';
 export class PlayerPart {
   constructor(x,y,r,img = box) {
     this.x = x;
@@ -91,6 +92,7 @@ export const player = {
     this.boxes.push(new PlayerPart(x, y));
     eatingOrder.push(0);
     addPoint();
+    eat.play();
   },
   death: function() {
     this.boxes.splice(1, this.boxes.length - 1);
@@ -102,12 +104,12 @@ export const player = {
   moveHead: function() {
     const mouseDistance = {
       x: (mouse.x - this.img2.width - this.boxes[0].x),
-      y: (mouse.y - this.img2.height - this.boxes[0].y)
+      y: (mouse.y - this.img2.height/2 - this.boxes[0].y)
     }
 
     let toMouseVelocity = {
-      x: mouseDistance.x/5,
-      y: mouseDistance.y/5
+      x: mouseDistance.x/25,
+      y: mouseDistance.y/25
     }
 
     const proportion = {
@@ -125,6 +127,11 @@ export const player = {
       this.velocity.y = CONSTANTS.maxVelocity * proportion.y > toMouseVelocity.y ? toMouseVelocity.y : CONSTANTS.maxVelocity * proportion.y;
     } else {
       this.velocity.y = CONSTANTS.maxVelocity * proportion.y > -toMouseVelocity.y ? toMouseVelocity.y : -CONSTANTS.maxVelocity * proportion.y;
+    }
+
+    if(Math.sqrt((mouseDistance.x + this.img2.width/2) ** 2 + (mouseDistance.y) ** 2) < CONSTANTS.headToMouseMinDistance) {
+      this.velocity.x = 0;
+      this.velocity.y = 0;
     }
 
     this.boxes[0].x += this.velocity.x;
