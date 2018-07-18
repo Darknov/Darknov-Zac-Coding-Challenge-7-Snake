@@ -5,8 +5,14 @@ import * as apples from './apples.js';
 import * as traps from './traps.js';
 import { music } from './audio.js';
 
+window.addEventListener('load', function () {
+  startGame();
+}, false);
 
-music.play();
+function startGame() {
+  requestAnimationFrame(frame)
+  music.play();
+}
 // fuction that draws everything we need
 // on the canvas
 function render() {
@@ -29,4 +35,4 @@ function frame() {
 	requestAnimationFrame(frame)
 }
 
-requestAnimationFrame(frame)
+

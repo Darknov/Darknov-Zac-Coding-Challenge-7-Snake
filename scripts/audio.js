@@ -8,8 +8,9 @@ function createAudio(src, volume = 0.1, loop = false) {
   audio.style.display = "none";
   audio.loop = loop;
   audio.src    = src;
+  document.body.appendChild(audio);
   return audio;
 }
 
 export const eat = createAudio(PATH_TO_SOUNDS + 'eat_02.ogg');
-export const music = createAudio('https://opengameart.org/sites/default/files/happy_0.mp3', 0.1, true);
+export const music = createAudio(PATH_TO_SOUNDS + 'happy.mp3', 0.1, true);
