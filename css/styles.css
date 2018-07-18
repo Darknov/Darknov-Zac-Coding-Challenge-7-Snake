@@ -4,6 +4,10 @@
 }
 
 
+html {
+	font-family: Games;
+}
+
 canvas {
 	border:1px solid #000000;
 }
