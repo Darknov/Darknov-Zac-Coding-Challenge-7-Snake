@@ -1,6 +1,6 @@
 @font-face {
 	font-family: Games;
-	src: url('/css/Fonts/Games.ttf');
+	src: url('./Fonts/Games.ttf');
 }
 
 .user {
@@ -31,7 +31,7 @@ body {
 }
 
 html {
-	background-image: url('/assets/bg.jpg'); 
+	background-image: url('../assets/bg.jpg'); 
 	background-repeat: no-repeat;
 	background-size: auto;
 }
