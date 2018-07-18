@@ -1,6 +1,6 @@
 import { context } from './canvas.js';
 import { mouse } from './mouse.js';
-import { box } from './images.js';
+import { box, head } from './images.js';
 import { CONSTANTS, changeScore, addPoint } from './GAME_OPTIONS.js';
 import { abs, isCollision } from './utils.js'
 import { apples } from './apples.js';
@@ -21,6 +21,7 @@ export const player = {
 	x: 0,
 	y: 0,
   img: box,
+  img2: head,
 	velocity: {x:0, y:0},
 	boxes: [new PlayerPart(0,0,0)],
 	render: function() {
@@ -46,7 +47,12 @@ export const player = {
           context.scale(CONSTANTS.eatingSizeX, CONSTANTS.eatingSizeY);
         }
       }
-			context.drawImage(this.img, -12, -12);
+      if(i != 0){
+        context.drawImage(this.img, -12, -12);
+      } else {
+        context.drawImage(this.img2, -12, -14);
+      }
+			
 			context.restore();
 		}
 	},
