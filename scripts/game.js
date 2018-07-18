@@ -5,11 +5,7 @@ import * as apples from './apples.js';
 import * as traps from './traps.js';
 import { music, eat } from './audio.js';
 
-window.addEventListener('load', function () {
-  startGame();
-}, false);
-
-function startGame() {
+export function startGame() {
   requestAnimationFrame(frame)
   music.muted = false;
   eat.muted = false;

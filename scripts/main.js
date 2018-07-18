@@ -1,3 +1,5 @@
+import { startGame } from './game.js';
+
 startButton.addEventListener("click",() => {
-	
-	newGame();
+	startGame();
+});
