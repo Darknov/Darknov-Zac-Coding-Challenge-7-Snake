@@ -1,16 +1,17 @@
 import { context } from './canvas.js';
 import { mouse } from './mouse.js';
-import { box } from './images.js';
+import { box, head, tail } from './images.js';
 import { CONSTANTS, changeScore, addPoint } from './GAME_OPTIONS.js';
 import { abs, isCollision } from './utils.js'
 import { apples } from './apples.js';
 import { traps } from './traps.js';
+import { eat } from './audio.js';
 export class PlayerPart {
-  constructor(x,y,r) {
+  constructor(x,y,r,img = box) {
     this.x = x;
     this.y = y;
     this.r = r;
-    this.img = box;
+    this.img = img;
   }
 }
 
@@ -21,8 +22,10 @@ export const player = {
 	x: 0,
 	y: 0,
   img: box,
+  img2: head,
+  img3: tail,
 	velocity: {x:0, y:0},
-	boxes: [new PlayerPart(0,0,0)],
+	boxes: [new PlayerPart(0,0,0,head)],
 	render: function() {
 		for(let i = this.boxes.length - 1; i >= 0; i--) {
 			context.save();
@@ -34,7 +37,7 @@ export const player = {
 			// so there is no instant rotation to the next box
 			let rotation = 0;
 			if(i == 0) {
-				rotation = Math.atan2(mouse.y - this.boxes[i].y - 12, mouse.x - this.boxes[i].x - 12);
+				rotation = Math.atan2(mouse.y - this.boxes[i].y - this.img2.height/2, mouse.x - this.boxes[i].x - this.img2.width/2);
         
 			} else {
 				rotation = Math.atan2(this.boxes[i-1].y - this.boxes[i].y, this.boxes[i-1].x - this.boxes[i].x);
@@ -46,7 +49,15 @@ export const player = {
           context.scale(CONSTANTS.eatingSizeX, CONSTANTS.eatingSizeY);
         }
       }
-			context.drawImage(this.img, -12, -12);
+      if(i === 0) {
+        context.drawImage(this.img2, -this.img2.width/2, -this.img2.height/2);
+      }
+      else if(i === this.boxes.length - 1){
+        context.drawImage(this.img3, -this.img3.width/2, -this.img3.height/2);
+      } else {
+        context.drawImage(this.img, -this.img.width/2, -this.img.height/2);
+      }
+			
 			context.restore();
 		}
 	},
@@ -81,6 +92,7 @@ export const player = {
     this.boxes.push(new PlayerPart(x, y));
     eatingOrder.push(0);
     addPoint();
+    eat.play();
   },
   death: function() {
     this.boxes.splice(1, this.boxes.length - 1);
@@ -91,13 +103,13 @@ export const player = {
   },
   moveHead: function() {
     const mouseDistance = {
-      x: (mouse.x - 24 - this.boxes[0].x),
-      y: (mouse.y - 12 - this.boxes[0].y)
+      x: (mouse.x - this.img2.width - this.boxes[0].x),
+      y: (mouse.y - this.img2.height/2 - this.boxes[0].y)
     }
 
     let toMouseVelocity = {
-      x: mouseDistance.x/5,
-      y: mouseDistance.y/5
+      x: mouseDistance.x/25,
+      y: mouseDistance.y/25
     }
 
     const proportion = {
@@ -115,6 +127,11 @@ export const player = {
       this.velocity.y = CONSTANTS.maxVelocity * proportion.y > toMouseVelocity.y ? toMouseVelocity.y : CONSTANTS.maxVelocity * proportion.y;
     } else {
       this.velocity.y = CONSTANTS.maxVelocity * proportion.y > -toMouseVelocity.y ? toMouseVelocity.y : -CONSTANTS.maxVelocity * proportion.y;
+    }
+
+    if(Math.sqrt((mouseDistance.x + this.img2.width/2) ** 2 + (mouseDistance.y) ** 2) < CONSTANTS.headToMouseMinDistance) {
+      this.velocity.x = 0;
+      this.velocity.y = 0;
     }
 
     this.boxes[0].x += this.velocity.x;

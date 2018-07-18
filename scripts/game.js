@@ -3,7 +3,10 @@ import { canvas, context, clearCanvas } from './canvas.js';
 import { player } from './player.js';
 import * as apples from './apples.js';
 import * as traps from './traps.js';
+import { music } from './audio.js';
 
+
+music.play();
 // fuction that draws everything we need
 // on the canvas
 function render() {
