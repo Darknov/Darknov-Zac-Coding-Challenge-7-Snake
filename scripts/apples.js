@@ -16,11 +16,11 @@ let lastGenerationTime = Date.now();
 
 export function update() {
   if(lastGenerationTime + CONSTANTS.appleGenerationInterval < Date.now() && apples.length < CONSTANTS.maxApples) {
-    const x = getRandomInt(0, canvas.width);
-    const y = getRandomInt(0, canvas.height);
     const generatedApple = new Apple();
-    generatedApple.x = x - generatedApple.img.width;
-    generatedApple.y = y - generatedApple.img.height;
+    const x = getRandomInt(generatedApple.img.width, canvas.width - generatedApple.img.width);
+    const y = getRandomInt(generatedApple.img.height, canvas.height - generatedApple.img.height);
+    generatedApple.x = x;
+    generatedApple.y = y;
     apples.push(generatedApple);
     lastGenerationTime = Date.now();
   }
