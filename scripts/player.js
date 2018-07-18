@@ -1,11 +1,12 @@
 import { context } from './canvas.js';
 import { mouse } from './mouse.js';
-import { box, head, tail } from './images.js';
+import { box, head, tail, yummy } from './images.js';
 import { CONSTANTS, changeScore, addPoint } from './GAME_OPTIONS.js';
-import { abs, isCollision } from './utils.js'
+import { abs, isCollision, getRandomInt } from './utils.js'
 import { apples } from './apples.js';
 import { traps } from './traps.js';
 import { eat, hit } from './audio.js';
+
 export class PlayerPart {
   constructor(x,y,r,img = box) {
     this.x = x;
@@ -17,6 +18,8 @@ export class PlayerPart {
 
 const eatingOrder = [];
 let eatingTime = Date.now();
+let yummyTime = Date.now();
+let showYummy = true;
 
 export const player = {
 	x: 0,
@@ -60,6 +63,9 @@ export const player = {
 			
 			context.restore();
 		}
+    if(showYummy) {
+      context.drawImage(yummy, this.boxes[0].x, this.boxes[0].y - yummy.height);
+    }
 	},
 	update: function() {
     this.moveHead();
@@ -86,11 +92,16 @@ export const player = {
       this.moveApplesDeeper();
     }
 
+    if(yummyTime + CONSTANTS.yummyTime < Date.now() && showYummy) {
+      showYummy = false;
+    }
+
 	},
   eatsApple: function() {
     const {x, y} =  this.boxes[this.boxes.length - 1];
     this.boxes.push(new PlayerPart(x, y));
     eatingOrder.push(0);
+    this.yummy();
     addPoint();
     eat.play();
   },
@@ -153,6 +164,12 @@ export const player = {
       }
     }
     eatingTime = Date.now();
+  },
+  yummy: function() {
+    if(getRandomInt(1, 100) < CONSTANTS.yummyChance) {
+      showYummy = true;
+      yummyTime = Date.now();
+    }
   }
 }
 

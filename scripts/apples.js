@@ -1,26 +1,26 @@
-import { apple } from './images.js';
+import { fruits } from './images.js';
 import { canvas, draw } from './canvas.js';
 import { CONSTANTS } from './GAME_OPTIONS.js';
 import { getRandomInt } from './utils.js';
 
 class Apple {
-	constructor(x,y) {
+	constructor(x = -50,y = -50) {
 		this.x = x;
 		this.y = y;
-		this.img = apple;
+		this.img = fruits[getRandomInt(0, fruits.length - 1)];
 	}
 }
 
 export const apples = [];
 let lastGenerationTime = Date.now();
-apples.push(new Apple(50,50));
 
 export function update() {
   if(lastGenerationTime + CONSTANTS.appleGenerationInterval < Date.now() && apples.length < CONSTANTS.maxApples) {
-    const generatedApple = new Apple(
-      getRandomInt(apple.width, canvas.width - apple.width), 
-      getRandomInt(apple.height, canvas.height - apple.height)
-    );
+    const x = getRandomInt(0, canvas.width);
+    const y = getRandomInt(0, canvas.height);
+    const generatedApple = new Apple();
+    generatedApple.x = x - generatedApple.img.width;
+    generatedApple.y = y - generatedApple.img.height;
     apples.push(generatedApple);
     lastGenerationTime = Date.now();
   }
