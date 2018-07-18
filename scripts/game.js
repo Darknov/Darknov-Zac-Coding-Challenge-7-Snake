@@ -16,9 +16,9 @@ export function startGame() {
 // on the canvas
 function render() {
 	clearCanvas();
-	player.render();
   apples.render();
   traps.render();
+  player.render();
 }
 
 // function that updates objects
