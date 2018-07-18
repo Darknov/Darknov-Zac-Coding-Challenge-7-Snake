@@ -3,17 +3,21 @@
 	src: url(Games.ttf);
 }
 
-#score {
+label {
 	font-family: Games;
 	font-size: 14px;
+}
+
+body {
+	background-image: url(bg.jpg); 
 }
 
 canvas {
 	border:4px solid #000000;
 	background-color: #FFCF6F;
 	display: flex;
-	/*justify-content: center;*/
 	margin: auto;
+	margin-top: 90px;
 }
 
 img {
