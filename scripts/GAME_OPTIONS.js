@@ -3,7 +3,8 @@ export const CONSTANTS = {
   appleGenerationInterval: 1000,
   eatingTime: 70,
   eatingSizeX: 1.2,
-  eatingSizeY: 1.2
+  eatingSizeY: 1.2,
+  headToMouseMinDistance: 40
 }
 
 export const PLAYER = {
