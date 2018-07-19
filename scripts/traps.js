@@ -1,5 +1,6 @@
 import { trap } from './images.js';
 import { canvas, context } from './canvas.js';
+import { getRandom } from './utils.js';
 
 class Trap {
   constructor(x,y) {
@@ -7,6 +8,7 @@ class Trap {
     this.y = y;
     this.img = trap;
     this.r = 0;
+    this.rV = getRandom(0.02, 0.07);
   }
 }
 
@@ -36,7 +38,7 @@ traps.push(new Trap(canvas.width/1.15 - trap.width/2,canvas.height/2 - trap.heig
 
 export function update() {
   for (const trap of traps) {
-    trap.r += 0.05;
+    trap.r += trap.rV;
   }
 }
 export function render() {
