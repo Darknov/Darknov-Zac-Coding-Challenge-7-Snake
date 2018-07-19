@@ -19,7 +19,7 @@ export class PlayerPart {
 const eatingOrder = [];
 let eatingTime = Date.now();
 let yummyTime = Date.now();
-let showYummy = true;
+let showYummy = false;
 
 export const player = {
 	x: 0,
