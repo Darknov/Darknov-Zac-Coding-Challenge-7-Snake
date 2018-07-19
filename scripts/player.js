@@ -1,11 +1,12 @@
 import { context } from './canvas.js';
 import { mouse } from './mouse.js';
-import { box, head, tail, yummy } from './images.js';
+import { box, head, tail, yummy, particle1, particle3 } from './images.js';
 import { CONSTANTS, changeScore, addPoint } from './GAME_OPTIONS.js';
 import { abs, isCollision, getRandomInt } from './utils.js'
 import { apples } from './apples.js';
 import { traps } from './traps.js';
 import { eat, hit } from './audio.js';
+import { ParticleEffect } from './particleEffect.js';
 
 export class PlayerPart {
   constructor(x,y,r,img = box) {
@@ -70,7 +71,6 @@ export const player = {
 	update: function() {
     this.moveHead();
     this.moveTail();
-
     for(let i = 0; i < apples.length; i++) {
       if(isCollision(this.boxes[0], apples[i], 5, 5)) {
         this.eatsApple();
@@ -99,6 +99,8 @@ export const player = {
 	},
   eatsApple: function() {
     const {x, y} =  this.boxes[this.boxes.length - 1];
+    const coordinates = { x: this.boxes[0].x, y: this.boxes[0].y };
+    new ParticleEffect({x: coordinates.x, y: coordinates.y}, particle3, 150);
     this.boxes.push(new PlayerPart(x, y));
     eatingOrder.push(0);
     this.yummy();
@@ -107,6 +109,8 @@ export const player = {
   },
   death: function() {
     hit.play();
+    const coordinates = { x: this.boxes[0].x, y: this.boxes[0].y };
+    new ParticleEffect({x: coordinates.x, y: coordinates.y}, particle1, 150);
     this.boxes.splice(1, this.boxes.length - 1);
     this.boxes[0].x = 50;
     this.boxes[0].y = 50;

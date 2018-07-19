@@ -4,6 +4,7 @@ import { player } from './player.js';
 import * as apples from './apples.js';
 import * as traps from './traps.js';
 import { music, eat, hit } from './audio.js';
+import * as particleEffects from './particleEffect.js';
 
 export function startGame() {
   requestAnimationFrame(frame)
@@ -19,13 +20,16 @@ function render() {
   apples.render();
   traps.render();
   player.render();
+  particleEffects.render();
+
 }
 
 // function that updates objects
 function update() {
-	player.update();
   apples.update();
   traps.update();
+	player.update();
+  particleEffects.update();
 }
 
 function frame() {
