@@ -81,7 +81,7 @@ export const player = {
     for(let i = 0; i < this.boxes.length; i++) {
       for(let j = 0; j < traps.length; j++) {
         if(isCollision(this.boxes[i], traps[j], 15, 15)) {
-          new ParticleEffect({x: this.boxes[i].x, y: this.boxes[i].y}, particle1, 150);
+          new ParticleEffect({x: this.boxes[i].x, y: this.boxes[i].y}, particle1, 350);
           this.death();
           break;
         }
@@ -90,7 +90,7 @@ export const player = {
 
     if(this.boxes[0].x < 0 || this.boxes[0].x > canvas.width - this.img.width ||
       this.boxes[0].y < 0 || this.boxes[0].y > canvas.height - this.img.height) {
-      new ParticleEffect({x: this.boxes[0].x, y: this.boxes[0].y}, particle1, 150);
+      new ParticleEffect({x: this.boxes[0].x, y: this.boxes[0].y}, particle1, 350);
       this.death();
     }
 
