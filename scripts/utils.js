@@ -3,7 +3,11 @@ export function abs(number) {
 }
 
 export function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+export function getRandom(min, max) {
+  return (Math.random() * (max - min) + min);
 }
 
 export function isCollision(obj1, obj2, lessWidth = 0, lessHeight = 0) {

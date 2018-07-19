@@ -1,7 +1,8 @@
-import { fruits } from './images.js';
+import { fruits, particle2 } from './images.js';
 import { canvas, draw } from './canvas.js';
 import { CONSTANTS } from './GAME_OPTIONS.js';
 import { getRandomInt } from './utils.js';
+import { ParticleEffect } from './particleEffect.js';
 
 class Apple {
 	constructor(x = -50,y = -50) {
@@ -22,6 +23,7 @@ export function update() {
     generatedApple.x = x;
     generatedApple.y = y;
     apples.push(generatedApple);
+    new ParticleEffect({x: generatedApple.x, y: generatedApple.y}, particle2, 150);
     lastGenerationTime = Date.now();
   }
 }
