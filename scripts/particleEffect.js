@@ -71,6 +71,3 @@ export function render() {
     particleEffect.render();
   }
 }
-
-
-new ParticleEffect({x: 100,y: 100}, particle1, 600);
