@@ -5,8 +5,11 @@ import * as apples from './apples.js';
 import * as traps from './traps.js';
 import { music, eat, hit } from './audio.js';
 import * as particleEffects from './particleEffect.js';
+import { checkIfImagesAreLoaded } from './images.js';
 
 export function startGame() {
+  console.log("start");
+  console.log(checkIfImagesAreLoaded());
   requestAnimationFrame(frame)
   hit.muted = false;
   music.muted = false;
