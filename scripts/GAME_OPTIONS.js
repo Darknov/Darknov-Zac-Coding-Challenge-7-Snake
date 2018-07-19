@@ -1,4 +1,7 @@
+import { canvas } from './canvas.js';
+
 export const CONSTANTS = {
+  startingPoint: {x: canvas.width/2, y: canvas.height/2},
 	maxVelocity: 5,
   appleGenerationInterval: 1000,
   eatingTime: 70,

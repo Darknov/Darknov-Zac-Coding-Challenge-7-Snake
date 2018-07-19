@@ -12,11 +12,28 @@ class Trap {
 
 export const traps = [];
 let lastGenerationTime = Date.now();
-traps.push(new Trap(canvas.width/2 - trap.width/2,canvas.height/2 - trap.height/2));
-traps.push(new Trap(canvas.width/4 - trap.width/2,canvas.height/4 - trap.height/2));
-traps.push(new Trap(canvas.width/1.3 - trap.width/2,canvas.height/1.3 - trap.height/2));
-traps.push(new Trap(canvas.width/1.3 - trap.width/2,canvas.height/4 - trap.height/2));
-traps.push(new Trap(canvas.width/4 - trap.width/2,canvas.height/1.3 - trap.height/2));
+
+// 8 traps in square
+traps.push(new Trap(canvas.width/3 - trap.width/2,canvas.height/2 - trap.height/2));
+traps.push(new Trap(canvas.width/3.5 - trap.width/2,canvas.height/4 - trap.height/2));
+traps.push(new Trap(canvas.width/3.5 - trap.width/2,canvas.height/1.3 - trap.height/2));//
+traps.push(new Trap(canvas.width/2 - trap.width/2,canvas.height/1.5 - trap.height/2));
+traps.push(new Trap(canvas.width/2 - trap.width/2,canvas.height/3.0 - trap.height/2));
+traps.push(new Trap(canvas.width/1.4 - trap.width/2,canvas.height/1.3 - trap.height/2));//
+traps.push(new Trap(canvas.width/1.4 - trap.width/2,canvas.height/4 - trap.height/2));
+traps.push(new Trap(canvas.width/1.5 - trap.width/2,canvas.height/2 - trap.height/2));
+
+
+// 8 extension traps
+traps.push(new Trap(canvas.width/8 - trap.width/2,canvas.height/2 - trap.height/2));
+traps.push(new Trap(canvas.width/8 - trap.width/2,canvas.height/8 - trap.height/2));
+traps.push(new Trap(canvas.width/8 - trap.width/2,canvas.height/1.1 - trap.height/2));
+traps.push(new Trap(canvas.width/2 - trap.width/2,canvas.height/1.1 - trap.height/2));
+traps.push(new Trap(canvas.width/2 - trap.width/2,canvas.height/8 - trap.height/2));
+traps.push(new Trap(canvas.width/1.1 - trap.width/2,canvas.height/1.1 - trap.height/2));
+traps.push(new Trap(canvas.width/1.1 - trap.width/2,canvas.height/8 - trap.height/2));
+traps.push(new Trap(canvas.width/1.1 - trap.width/2,canvas.height/2 - trap.height/2));
+
 export function update() {
   for (const trap of traps) {
     trap.r += 0.05;
