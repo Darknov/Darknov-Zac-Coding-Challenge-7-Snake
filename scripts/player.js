@@ -1,6 +1,6 @@
 import { context } from './canvas.js';
 import { mouse } from './mouse.js';
-import { box, head, tail, yummy, particle1, particle3 } from './images.js';
+import { box, head, tail, yummy, delicious, particle1, particle3 } from './images.js';
 import { CONSTANTS, changeScore, addPoint } from './GAME_OPTIONS.js';
 import { abs, isCollision, getRandomInt } from './utils.js'
 import { apples } from './apples.js';
@@ -20,6 +20,7 @@ export class PlayerPart {
 const eatingOrder = [];
 let eatingTime = Date.now();
 let yummyTime = Date.now();
+let yummyImg = yummy;
 let showYummy = false;
 
 export const player = {
@@ -65,7 +66,7 @@ export const player = {
 			context.restore();
 		}
     if(showYummy) {
-      context.drawImage(yummy, this.boxes[0].x, this.boxes[0].y - yummy.height);
+      context.drawImage(yummyImg, this.boxes[0].x, this.boxes[0].y - yummyImg.height);
     }
 	},
 	update: function() {
@@ -170,6 +171,11 @@ export const player = {
   },
   yummy: function() {
     if(getRandomInt(1, 100) < CONSTANTS.yummyChance) {
+      if(getRandomInt(0,1) == 0) {
+        yummyImg = delicious;
+      } else {
+        yummyImg = yummy;
+      }
       showYummy = true;
       yummyTime = Date.now();
     }
