@@ -1,4 +1,4 @@
-import { context } from './canvas.js';
+import { context, canvas } from './canvas.js';
 import { mouse } from './mouse.js';
 import { box, head, tail, yummy, delicious, particle1, particle3 } from './images.js';
 import { CONSTANTS, changeScore, addPoint } from './GAME_OPTIONS.js';
@@ -24,13 +24,11 @@ let yummyImg = yummy;
 let showYummy = false;
 
 export const player = {
-	x: 0,
-	y: 0,
   img: box,
   img2: head,
   img3: tail,
 	velocity: {x:0, y:0},
-	boxes: [new PlayerPart(0,0,0,head)],
+	boxes: [new PlayerPart(CONSTANTS.startingPoint.x, CONSTANTS.startingPoint.y, 0, head)],
 	render: function() {
 		for(let i = this.boxes.length - 1; i >= 0; i--) {
 			context.save();
@@ -90,6 +88,12 @@ export const player = {
       }
     }
 
+    if(this.boxes[0].x < 0 || this.boxes[0].x > canvas.width - this.img.width ||
+      this.boxes[0].y < 0 || this.boxes[0].y > canvas.height - this.img.height) {
+      new ParticleEffect({x: this.boxes[0].x, y: this.boxes[0].y}, particle1, 150);
+      this.death();
+    }
+
     if(eatingTime + CONSTANTS.eatingTime < Date.now()) {
       this.moveApplesDeeper();
     }
@@ -112,8 +116,8 @@ export const player = {
   death: function() {
     hit.play();
     this.boxes.splice(1, this.boxes.length - 1);
-    this.boxes[0].x = 50;
-    this.boxes[0].y = 50;
+    this.boxes[0].x = CONSTANTS.startingPoint.x;
+    this.boxes[0].y = CONSTANTS.startingPoint.y;
     changeScore(0);
     apples.splice(0, apples.length);
   },
@@ -170,7 +174,7 @@ export const player = {
     eatingTime = Date.now();
   },
   yummy: function() {
-    if(getRandomInt(1, 100) < CONSTANTS.yummyChance) {
+    if(getRandomInt(1, 100) <= CONSTANTS.yummyChance) {
       if(getRandomInt(0,1) == 0) {
         yummyImg = delicious;
       } else {
