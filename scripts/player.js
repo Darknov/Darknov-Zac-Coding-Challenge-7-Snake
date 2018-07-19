@@ -82,6 +82,7 @@ export const player = {
     for(let i = 0; i < this.boxes.length; i++) {
       for(let j = 0; j < traps.length; j++) {
         if(isCollision(this.boxes[i], traps[j], 15, 15)) {
+          new ParticleEffect({x: this.boxes[i].x, y: this.boxes[i].y}, particle1, 150);
           this.death();
           break;
         }
@@ -109,8 +110,6 @@ export const player = {
   },
   death: function() {
     hit.play();
-    const coordinates = { x: this.boxes[0].x, y: this.boxes[0].y };
-    new ParticleEffect({x: coordinates.x, y: coordinates.y}, particle1, 150);
     this.boxes.splice(1, this.boxes.length - 1);
     this.boxes[0].x = 50;
     this.boxes[0].y = 50;
