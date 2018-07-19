@@ -27,12 +27,12 @@ traps.push(new Trap(canvas.width/1.5 - trap.width/2,canvas.height/2 - trap.heigh
 // 8 extension traps
 traps.push(new Trap(canvas.width/8 - trap.width/2,canvas.height/2 - trap.height/2));
 traps.push(new Trap(canvas.width/8 - trap.width/2,canvas.height/8 - trap.height/2));
-traps.push(new Trap(canvas.width/8 - trap.width/2,canvas.height/1.1 - trap.height/2));
-traps.push(new Trap(canvas.width/2 - trap.width/2,canvas.height/1.1 - trap.height/2));
+traps.push(new Trap(canvas.width/8 - trap.width/2,canvas.height/1.15 - trap.height/2));
+traps.push(new Trap(canvas.width/2 - trap.width/2,canvas.height/1.15 - trap.height/2));
 traps.push(new Trap(canvas.width/2 - trap.width/2,canvas.height/8 - trap.height/2));
-traps.push(new Trap(canvas.width/1.1 - trap.width/2,canvas.height/1.1 - trap.height/2));
-traps.push(new Trap(canvas.width/1.1 - trap.width/2,canvas.height/8 - trap.height/2));
-traps.push(new Trap(canvas.width/1.1 - trap.width/2,canvas.height/2 - trap.height/2));
+traps.push(new Trap(canvas.width/1.15 - trap.width/2,canvas.height/1.15 - trap.height/2));
+traps.push(new Trap(canvas.width/1.15 - trap.width/2,canvas.height/8 - trap.height/2));
+traps.push(new Trap(canvas.width/1.15 - trap.width/2,canvas.height/2 - trap.height/2));
 
 export function update() {
   for (const trap of traps) {
