@@ -11,7 +11,7 @@ export const particle2 = document.getElementById("particle2");
 export const particle3 = document.getElementById("particle3");
 export const fruits = [apple];
 
-export function checkIfImagesAreLoaded() {
+export function areImagesLoaded() {
   let imgs = document.images;
   let isLoaded = true;
   for (const img of imgs) {
@@ -23,7 +23,7 @@ export function checkIfImagesAreLoaded() {
   return isLoaded;
 }
 
-export function checkHowManyImagesAreLoaded() {
+export function howManyImagesLoaded() {
   let imgs = document.images;
   let howMany = 0;
   for (const img of imgs) {

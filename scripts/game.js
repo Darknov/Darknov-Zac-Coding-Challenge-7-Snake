@@ -5,12 +5,26 @@ import * as apples from './apples.js';
 import * as traps from './traps.js';
 import { music, eat, hit } from './audio.js';
 import * as particleEffects from './particleEffect.js';
-import { checkIfImagesAreLoaded } from './images.js';
+import { areImagesLoaded, howManyImagesLoaded } from './images.js';
+
+function loadingImages() {
+  let imgs = images.checkHowManyImagesAreLoaded();
+  document.getElementById("images").textContent = imgs.x + "/" + imgs.y;  
+}
+
+function prepareGame() {
+  // will have to change it to something
+  // more visual for player
+  if(!areImagesLoaded()) {
+    do {
+      console.log("Waiting for images to load");
+    } while(!areImagesLoaded());
+  }
+}
 
 export function startGame() {
-  console.log("start");
-  console.log(checkIfImagesAreLoaded());
-  requestAnimationFrame(frame)
+  prepareGame();
+  requestAnimationFrame(frame);
   hit.muted = false;
   music.muted = false;
   eat.unmute();
