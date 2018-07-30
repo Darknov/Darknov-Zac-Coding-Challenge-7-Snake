@@ -20,7 +20,6 @@ export const PLAYER = {
 
 export const changeScore = (score) => {
   PLAYER.score = score;
-  console.log(score);
   document.getElementById("score").textContent = PLAYER.score;
 }
 

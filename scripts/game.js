@@ -7,39 +7,13 @@ import { music, eat, hit } from './audio.js';
 import * as particleEffects from './particleEffect.js';
 import { areImagesLoaded, howManyImagesLoaded } from './images.js';
 
-let wasNotClicked = true;
-
-isGameLoaded();
+let isGameStarted = false;
 
 function loadingImages() {
   let imgs = images.checkHowManyImagesAreLoaded();
   document.getElementById("images").textContent = imgs.x + "/" + imgs.y;  
 }
-// should prevent starting g
-function isGameLoaded() {
-  if(wasNotClicked) {
-    startGameIfImagesLoaded();
-  } 
-  wasNotClicked = false;
 
-}
-
-function startGameIfImagesLoaded() { 
-  if(!areImagesLoaded()) {
-    console.log("Waiting for images to load");
-    setTimeout(startGameIfImagesLoaded, 300);
-  } else {
-    startGame();
-  }
-}
-
-export function startGame() {
-  requestAnimationFrame(frame);
-  hit.muted = false;
-  music.muted = false;
-  eat.unmute();
-  music.play();
-}
 // fuction that draws everything we need
 // on the canvas
 function render() {
@@ -63,6 +37,28 @@ function frame() {
 	update();
 	render();
 	requestAnimationFrame(frame)
+}
+
+function startGame() {
+  music.play();
+  requestAnimationFrame(frame);
+}
+
+function startGameIfImagesLoaded() { 
+  if(!areImagesLoaded()) {
+    console.log("Waiting for images to load");
+    setTimeout(startGameIfImagesLoaded, 300);
+  } else if(!isGameStarted) {
+    isGameStarted = true;
+    startGame();
+  }
+}
+
+export function prepareGame() {
+  hit.muted = false;
+  music.muted = false;
+  eat.unmute();
+  startGameIfImagesLoaded();
 }
 
 

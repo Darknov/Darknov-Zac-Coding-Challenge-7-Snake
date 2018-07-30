@@ -1,5 +1,5 @@
-import { startGame } from './game.js';
+import { prepareGame } from './game.js';
 
 startButton.addEventListener("click",() => {
-	startGame();
+	prepareGame();
 });
