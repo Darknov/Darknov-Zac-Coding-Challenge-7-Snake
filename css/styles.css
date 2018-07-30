@@ -9,9 +9,9 @@
 	display: flex;
 	margin: auto;
 	justify-content: center;
-	width: 1030px;
+	width: 900px;
 	border: 5px solid white;
-	border-radius: 5px;
+	border-radius: 50px;
 
 }
 
@@ -20,10 +20,58 @@
 	color: #04D0D0;
 }
 
-.username {
-	padding-left: 50px;
-	color: #04D0D0;
+#startButton {
+  border: none;
+  cursor: pointer;
+  font-family: Games;
+  color: white;
+  padding: 15px 40px;
+  border-radius: 20px;
+  font-size: 22px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  background: #DE003C;
 }
+
+/* Ripple magic */
+#startButton {
+  position: relative;
+  overflow: hidden;
+}
+
+#startButton:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+#startButton:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+#startButton:focus {outline:0;}
 
 body {
 	font-family: Games;
@@ -50,3 +98,5 @@ canvas {
 img {
 	display: none;
 }
+
+/*testing*
