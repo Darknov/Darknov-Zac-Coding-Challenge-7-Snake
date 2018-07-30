@@ -5,14 +5,15 @@ import * as apples from './apples.js';
 import * as traps from './traps.js';
 import { music, eat, hit } from './audio.js';
 import * as particleEffects from './particleEffect.js';
+import { areImagesLoaded, howManyImagesLoaded } from './images.js';
 
-export function startGame() {
-  requestAnimationFrame(frame)
-  hit.muted = false;
-  music.muted = false;
-  eat.unmute();
-  music.play();
+let isGameStarted = false;
+
+function loadingImages() {
+  let imgs = images.checkHowManyImagesAreLoaded();
+  document.getElementById("images").textContent = imgs.x + "/" + imgs.y;  
 }
+
 // fuction that draws everything we need
 // on the canvas
 function render() {
@@ -36,6 +37,28 @@ function frame() {
 	update();
 	render();
 	requestAnimationFrame(frame)
+}
+
+function startGame() {
+  music.play();
+  requestAnimationFrame(frame);
+}
+
+function startGameIfImagesLoaded() { 
+  if(!areImagesLoaded()) {
+    console.log("Waiting for images to load");
+    setTimeout(startGameIfImagesLoaded, 300);
+  } else if(!isGameStarted) {
+    isGameStarted = true;
+    startGame();
+  }
+}
+
+export function prepareGame() {
+  hit.muted = false;
+  music.muted = false;
+  eat.unmute();
+  startGameIfImagesLoaded();
 }
 
 
