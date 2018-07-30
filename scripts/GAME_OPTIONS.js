@@ -15,12 +15,17 @@ export const CONSTANTS = {
 }
 
 export const PLAYER = {
-  score: 0
+  score: 0,
+  highscore: 0
 }
 
 export const changeScore = (score) => {
   PLAYER.score = score;
+  if(PLAYER.score > PLAYER.highscore) {
+    PLAYER.highscore = PLAYER.score;
+  }
   document.getElementById("score").textContent = PLAYER.score;
+  document.getElementById("highscore").textContent = PLAYER.highscore;
 }
 
 export const addPoint = () => {

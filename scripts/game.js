@@ -9,11 +9,6 @@ import { areImagesLoaded, howManyImagesLoaded } from './images.js';
 
 let isGameStarted = false;
 
-function loadingImages() {
-  let imgs = images.checkHowManyImagesAreLoaded();
-  document.getElementById("images").textContent = imgs.x + "/" + imgs.y;  
-}
-
 // fuction that draws everything we need
 // on the canvas
 function render() {

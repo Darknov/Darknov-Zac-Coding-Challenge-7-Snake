@@ -5,19 +5,26 @@
 
 .user {
 	background: #02000C;
-	padding-top: 20px;
 	display: flex;
+	flex-direction: column;
+	align-items: center;
 	margin: auto;
+	margin-bottom: 0;
 	justify-content: center;
 	width: 900px;
 	border: 5px solid white;
 	border-radius: 50px;
+	color: #04D0D0;
 
 }
 
 .userscore {
-	display: flex;
-	color: #04D0D0;
+	display: fixed;
+	
+}
+
+.score {
+	color: #02eded;
 }
 
 #startButton {
@@ -91,7 +98,6 @@ canvas {
 	background-repeat: repeat;
 	display: flex;
 	margin: auto;
-	margin-top: 90px;
 	opacity: .95;
 }
 
@@ -99,4 +105,11 @@ img {
 	display: none;
 }
 
+.gameArea {
+	margin-top: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+  align-items: center;
+}
 /*testing*
