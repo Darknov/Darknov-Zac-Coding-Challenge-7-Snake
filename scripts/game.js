@@ -7,23 +7,33 @@ import { music, eat, hit } from './audio.js';
 import * as particleEffects from './particleEffect.js';
 import { areImagesLoaded, howManyImagesLoaded } from './images.js';
 
+let wasNotClicked = true;
+
+isGameLoaded();
+
 function loadingImages() {
   let imgs = images.checkHowManyImagesAreLoaded();
   document.getElementById("images").textContent = imgs.x + "/" + imgs.y;  
 }
+// should prevent starting g
+function isGameLoaded() {
+  if(wasNotClicked) {
+    startGameIfImagesLoaded();
+  } 
+  wasNotClicked = false;
 
-function prepareGame() {
-  // will have to change it to something
-  // more visual for player
+}
+
+function startGameIfImagesLoaded() { 
   if(!areImagesLoaded()) {
-    do {
-      console.log("Waiting for images to load");
-    } while(!areImagesLoaded());
+    console.log("Waiting for images to load");
+    setTimeout(startGameIfImagesLoaded, 300);
+  } else {
+    startGame();
   }
 }
 
 export function startGame() {
-  prepareGame();
   requestAnimationFrame(frame);
   hit.muted = false;
   music.muted = false;
