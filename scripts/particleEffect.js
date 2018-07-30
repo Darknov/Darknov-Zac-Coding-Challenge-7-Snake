@@ -51,7 +51,14 @@ export class ParticleEffect {
 
   render() {
     for (const particle of this.particles) {
-      context.drawImage(this.img, this.x + particle.x, this.y + particle.y);
+      context.save();
+      const scale = 0.5 + (this.time - (Date.now() - this.startTime)) / this.time;
+      context.scale(scale, scale);
+      context.drawImage(this.img, 
+        (this.x + particle.x - this.img.width/2 * scale) / scale, 
+        (this.y + particle.y - this.img.height/2 * scale) / scale
+      );
+      context.restore();
     }
   }
 }
