@@ -115,8 +115,27 @@ img {
 	display: none;
 }
 
+#leftCurtain {
+	position: absolute;
+left: 0;
+top: 0;
+right: 0;
+margin: auto;
+	width: 1024px;
+	height: 768px;
+	border: 10px solid #000000;
+	z-index: 9;
+	background-color: black;
+}
+
 .gameArea {
 	margin-top: 0;
 	position: relative;
 }
-/*testing*
+/*testing*/
+
+.flipLeft {
+	transition-duration: 0.5s;
+	transform: rotateY(90deg) rotateX(90deg);
+
+}
