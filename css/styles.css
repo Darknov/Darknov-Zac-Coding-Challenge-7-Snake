@@ -117,13 +117,15 @@ img {
 
 #leftCurtain {
 	position: absolute;
-left: 0;
-top: 0;
-right: 0;
-margin: auto;
+	left: 0;
+	top: 0;
+	right: 0;
+	margin: auto;
 	width: 1024px;
 	height: 768px;
-	border: 10px solid #000000;
+	border-style: solid;
+	border-color: #202020;
+	border-width: 10px;
 	z-index: 9;
 	background-color: black;
 }
