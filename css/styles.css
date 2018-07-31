@@ -28,57 +28,65 @@
 }
 
 #startButton {
-  border: none;
-  cursor: pointer;
-  font-family: Games;
-  color: white;
-  padding: 15px 40px;
-  border-radius: 20px;
-  font-size: 22px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  background: #DE003C;
+	border: none;
+	cursor: pointer;
+	font-family: Games;
+	color: white;
+	padding: 15px 40px;
+	border-radius: 20px;
+	font-size: 36px;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+	background: #DE003C;
+	position: absolute;
+	left:50%;
+	top:50%;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	z-index: 10;
 }
 
+/* doesnt work when button is centered*/
 /* Ripple magic */
-#startButton {
-  position: relative;
-  overflow: hidden;
-}
+/*#startButton {
+	position: relative;
+	overflow: hidden;
+	}*/
 
-#startButton:after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 5px;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.5);
-  opacity: 0;
-  border-radius: 100%;
-  transform: scale(1, 1) translate(-50%);
-  transform-origin: 50% 50%;
+/*#startButton:after {
+	content: "";
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 5px;
+	height: 5px;
+	background: rgba(255, 255, 255, 0.5);
+	opacity: 0;
+	border-radius: 100%;
+	transform: scale(1, 1) translate(-50%);
+	transform-origin: 50% 50%;
 }
-
+*/
 @keyframes ripple {
-  0% {
-    transform: scale(0, 0);
-    opacity: 1;
-  }
-  20% {
-    transform: scale(25, 25);
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(40, 40);
-  }
+	0% {
+		transform: scale(0, 0);
+		opacity: 1;
+	}
+	20% {
+		transform: scale(25, 25);
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		transform: scale(40, 40);
+	}
 }
 
-#startButton:focus:not(:active)::after {
-  animation: ripple 1s ease-out;
+/*#startButton:focus:not(:active)::after {
+	animation: ripple 1s ease-out;
 }
 
-#startButton:focus {outline:0;}
+#startButton:focus {outline:0;}*/
 
 body {
 	font-family: Games;
@@ -96,8 +104,10 @@ canvas {
 	border-radius: 15px;
 	background-image: url('../assets/sand.png');
 	background-repeat: repeat;
-	display: flex;
-	margin: auto;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	display: relative;
 	opacity: .95;
 }
 
@@ -107,9 +117,6 @@ img {
 
 .gameArea {
 	margin-top: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-  align-items: center;
+	position: relative;
 }
 /*testing*
