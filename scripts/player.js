@@ -14,6 +14,8 @@ export class PlayerPart {
     this.y = y;
     this.r = r;
     this.img = img;
+    this.lastX = x;
+    this.lastY = y;
   }
 }
 
@@ -94,6 +96,17 @@ export const player = {
       this.death();
     }
 
+    if(CONSTANTS.mode === 1) {
+      if(this.boxes.length > 15) {
+        for(let i = 15; i < this.boxes.length; i++) {
+          if(isCollision(this.boxes[0], this.boxes[i], 15, 15)) {
+            new ParticleEffect({x: this.boxes[0].x, y: this.boxes[0].y}, particle1, 350);
+            this.death();
+          }
+        }
+      }
+    }
+
     if(eatingTime + CONSTANTS.eatingTime < Date.now()) {
       this.moveApplesDeeper();
     }
@@ -107,7 +120,17 @@ export const player = {
     const {x, y} =  this.boxes[this.boxes.length - 1];
     const coordinates = { x: this.boxes[0].x, y: this.boxes[0].y };
     new ParticleEffect({x: coordinates.x, y: coordinates.y}, particle3, 150);
-    this.boxes.push(new PlayerPart(x, y));
+    if(CONSTANTS.mode === 0) {
+      this.boxes.push(new PlayerPart(x, y));
+    }
+    
+    if(CONSTANTS.mode === 1)
+    {
+      for(let i = 0; i < 5; i++) {
+        player.boxes.push(new PlayerPart(x, y, 0));
+      }
+    }
+
     eatingOrder.push(0);
     this.yummy();
     addPoint();
@@ -154,14 +177,31 @@ export const player = {
       this.velocity.y = 0;
     }
 
+    this.boxes[0].lastX = this.boxes[0].x;
+    this.boxes[0].lastY = this.boxes[0].y;
     this.boxes[0].x += this.velocity.x;
     this.boxes[0].y += this.velocity.y;
   },
   moveTail: function() {
-    for(let i = 1; i < this.boxes.length; i++) {
-      this.boxes[i].x += (this.boxes[i-1].x - this.boxes[i].x)/5 * (abs(this.velocity.x) + abs(this.velocity.y)) / 5;
-      this.boxes[i].y += (this.boxes[i-1].y - this.boxes[i].y)/5 * (abs(this.velocity.x) + abs(this.velocity.y)) / 5;
+    if(CONSTANTS.mode === 0)
+    {
+      for(let i = 1; i < this.boxes.length; i++) {
+        this.boxes[i].x += (this.boxes[i-1].x - this.boxes[i].x)/5 * (abs(this.velocity.x) + abs(this.velocity.y)) / 5;
+        this.boxes[i].y += (this.boxes[i-1].y - this.boxes[i].y)/5 * (abs(this.velocity.x) + abs(this.velocity.y)) / 5;
+      }
     }
+
+    if(CONSTANTS.mode === 1) {
+      for(let i = 1; i < this.boxes.length; i++) {
+        this.boxes[i].lastX = this.boxes[i].x;
+        this.boxes[i].lastY = this.boxes[i].y;
+        if(abs(this.velocity.x) + abs(this.velocity.y) > 0.5) {
+          this.boxes[i].x = this.boxes[i-1].lastX;
+          this.boxes[i].y = this.boxes[i-1].lastY;
+        }
+      }
+    }
+
   },
   moveApplesDeeper: function() {
     for(let i = 0; i < eatingOrder.length; i++) {
@@ -185,4 +225,3 @@ export const player = {
     }
   }
 }
-

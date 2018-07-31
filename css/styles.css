@@ -28,7 +28,7 @@
 	color: #04D0D0;
 }
 
-#startButton {
+.startButton {
 	border: none;
 	cursor: pointer;
 	font-family: Games;
@@ -38,7 +38,20 @@
 	font-size: 36px;
 	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 	background: #DE003C;
+	
+	z-index: 10;
+}
+
+#startButton1 {
+	margin-top: 25px;
+	display: block;
+	z-index: 10;	
+}
+
+#startButtons {
 	position: absolute;
+	display: flex;
+	flex-direction: column;
 	left:50%;
 	top:50%;
 	-webkit-transform: translate(-50%, -50%);
@@ -46,48 +59,6 @@
 	transform: translate(-50%, -50%);
 	z-index: 10;
 }
-
-/* doesnt work when button is centered*/
-/* Ripple magic */
-/*#startButton {
-	position: relative;
-	overflow: hidden;
-	}*/
-
-/*#startButton:after {
-	content: "";
-	position: relative;
-	top: 0;
-	left: 0;
-	width: 5px;
-	height: 5px;
-	background: rgba(255, 255, 255, 0.5);
-	opacity: 0;
-	border-radius: 100%;
-	transform: scale(1, 1) translate(-50%);
-	transform-origin: 50% 50%;
-}
-*/
-@keyframes ripple {
-	0% {
-		transform: scale(0, 0);
-		opacity: 1;
-	}
-	20% {
-		transform: scale(25, 25);
-		opacity: 1;
-	}
-	100% {
-		opacity: 0;
-		transform: scale(40, 40);
-	}
-}
-
-/*#startButton:focus:not(:active)::after {
-	animation: ripple 1s ease-out;
-}
-
-#startButton:focus {outline:0;}*/
 
 body {
 	font-family: Games;
@@ -140,5 +111,18 @@ img {
 .flipLeft {
 	transition-duration: 0.5s;
 	transform: rotateY(90deg) rotateX(90deg);
+}
 
+#instruction {
+	font-family: Games;
+	color: white;
+	font-size: 36px;
+	z-index: 10;
+	text-align: center;
+	display: block;
+	margin-top: 25px;
+	border-style: dashed;
+	border-width: 5px;
+	border-color: white;
+	padding: 10px;
 }

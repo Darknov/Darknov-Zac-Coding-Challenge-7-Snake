@@ -6,6 +6,7 @@ import * as traps from './traps.js';
 import { music, eat, hit } from './audio.js';
 import * as particleEffects from './particleEffect.js';
 import { areImagesLoaded, howManyImagesLoaded } from './images.js';
+import { CONSTANTS } from './GAME_OPTIONS.js';
 
 let isGameStarted = false;
 
@@ -49,10 +50,11 @@ function startGameIfImagesLoaded() {
   }
 }
 
-export function prepareGame() {
+export function prepareGame(mode) {
   hit.muted = false;
   music.muted = false;
   eat.unmute();
+  CONSTANTS.mode = mode;
   startGameIfImagesLoaded();
 }
 

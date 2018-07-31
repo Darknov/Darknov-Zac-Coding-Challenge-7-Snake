@@ -11,7 +11,8 @@ export const CONSTANTS = {
   eatingSizeY: 1.2,
   headToMouseMinDistance: 40,
   maxApples: 30,
-  brutality: 40 // how many particles in particleEffects
+  brutality: 40, // how many particles in particleEffects
+  mode: 0
 }
 
 export const PLAYER = {
