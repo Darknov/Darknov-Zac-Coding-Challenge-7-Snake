@@ -63,12 +63,10 @@
 body {
 	font-family: Games;
 	font-size: 80px;
-}
-
-html {
 	background-image: url('../assets/bg.jpg'); 
 	background-repeat: no-repeat;
 	background-size: auto;
+	width: 100%;
 }
 
 canvas {
