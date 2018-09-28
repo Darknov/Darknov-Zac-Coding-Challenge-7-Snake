@@ -81,6 +81,9 @@ export const player = {
     }
 
     for(let i = 0; i < this.boxes.length; i++) {
+	    if(CONSTANTS.mode === 1 && i >= 1) {
+		    break;
+	    }
       for(let j = 0; j < traps.length; j++) {
         if(isCollision(this.boxes[i], traps[j], 15, 15)) {
           new ParticleEffect({x: this.boxes[i].x, y: this.boxes[i].y}, particle1, 350);
