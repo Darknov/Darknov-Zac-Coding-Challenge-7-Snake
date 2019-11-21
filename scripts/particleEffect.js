@@ -7,7 +7,7 @@ import { abs } from './utils.js';
 const particleEffects = [];
 
 export class ParticleEffect {
-  constructor({x, y}, img, time) {
+  constructor({ x, y }, img, time) {
     this.x = x;
     this.y = y;
     this.img = img;
@@ -17,19 +17,19 @@ export class ParticleEffect {
   }
 
   fire() {
-    for(let i = 0; i < CONSTANTS.brutality; i++) {
+    for (let i = 0; i < CONSTANTS.brutality; i++) {
       //some spread(It has a good spread :))
-      const particle = {x: getRandomInt(-10, 10), y: getRandomInt(-10, 10), velocity: {x: 0, y: 0}};
-      
+      const particle = { x: getRandomInt(-10, 10), y: getRandomInt(-10, 10), velocity: { x: 0, y: 0 } };
+
       const angle = getRandomInt(0, Math.PI);
       const proportion = {
         x: abs(Math.sin(angle)),
         y: abs(Math.cos(angle))
       }
-      if(getRandomInt(0, 1) === 0) {
+      if (getRandomInt(0, 1) === 0) {
         proportion.x = -proportion.x;
       }
-      if(getRandomInt(0, 1) === 0) {
+      if (getRandomInt(0, 1) === 0) {
         proportion.y = -proportion.y;
       }
       particle.velocity.x = 5 * proportion.x;
@@ -54,9 +54,9 @@ export class ParticleEffect {
       context.save();
       const scale = 0.5 + (this.time - (Date.now() - this.startTime)) / this.time;
       context.scale(scale, scale);
-      context.drawImage(this.img, 
-        (this.x + particle.x - this.img.width/2 * scale) / scale, 
-        (this.y + particle.y - this.img.height/2 * scale) / scale
+      context.drawImage(this.img,
+        (this.x + particle.x - this.img.width / 2 * scale) / scale,
+        (this.y + particle.y - this.img.height / 2 * scale) / scale
       );
       context.restore();
     }
@@ -64,9 +64,9 @@ export class ParticleEffect {
 }
 
 export function update() {
-  for(let i = 0; i < particleEffects.length; i++) {
+  for (let i = 0; i < particleEffects.length; i++) {
     particleEffects[i].update();
-    if(particleEffects[i].startTime + particleEffects[i].time < Date.now()) {
+    if (particleEffects[i].startTime + particleEffects[i].time < Date.now()) {
       particleEffects.splice(i, 1);
       i--;
     }

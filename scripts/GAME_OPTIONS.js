@@ -1,8 +1,8 @@
 import { canvas } from './canvas.js';
 
 export const CONSTANTS = {
-  startingPoint: {x: canvas.width/2, y: canvas.height/2},
-	maxVelocity: 5,
+  startingPoint: { x: canvas.width / 2, y: canvas.height / 2 },
+  maxVelocity: 5,
   appleGenerationInterval: 1000,
   eatingTime: 70,
   yummyTime: 2000,
@@ -22,7 +22,7 @@ export const PLAYER = {
 
 export const changeScore = (score) => {
   PLAYER.score = score;
-  if(PLAYER.score > PLAYER.highscore) {
+  if (PLAYER.score > PLAYER.highscore) {
     PLAYER.highscore = PLAYER.score;
   }
   document.getElementById("score").textContent = PLAYER.score;

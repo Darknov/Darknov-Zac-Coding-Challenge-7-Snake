@@ -5,14 +5,14 @@ function startGame(mode) {
   startButtons.style.display = "none";
   startButtons.hidden = true;
   leftCurtain.classList.add("flipLeft");
-  prepareGame(mode); 
-} 
+  prepareGame(mode);
+}
 
-startButton.addEventListener("click",() => {
+startButton.addEventListener("click", () => {
   startGame(0);
 });
 
-startButton1.addEventListener("click",() => {
+startButton1.addEventListener("click", () => {
   startGame(1);
 });
 

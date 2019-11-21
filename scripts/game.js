@@ -13,7 +13,7 @@ let isGameStarted = false;
 // fuction that draws everything we need
 // on the canvas
 function render() {
-	clearCanvas();
+  clearCanvas();
   apples.render();
   traps.render();
   player.render();
@@ -25,14 +25,14 @@ function render() {
 function update() {
   apples.update();
   traps.update();
-	player.update();
+  player.update();
   particleEffects.update();
 }
 
 function frame() {
-	update();
-	render();
-	requestAnimationFrame(frame)
+  update();
+  render();
+  requestAnimationFrame(frame)
 }
 
 function startGame() {
@@ -40,11 +40,11 @@ function startGame() {
   requestAnimationFrame(frame);
 }
 
-function startGameIfImagesLoaded() { 
-  if(!areImagesLoaded()) {
+function startGameIfImagesLoaded() {
+  if (!areImagesLoaded()) {
     console.log("Waiting for images to load");
     setTimeout(startGameIfImagesLoaded, 300);
-  } else if(!isGameStarted) {
+  } else if (!isGameStarted) {
     isGameStarted = true;
     startGame();
   }

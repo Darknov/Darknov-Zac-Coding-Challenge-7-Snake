@@ -15,7 +15,7 @@ export function areImagesLoaded() {
   let imgs = document.images;
   let isLoaded = true;
   for (const img of imgs) {
-    if(!img.complete) {
+    if (!img.complete) {
       isLoaded = false;
       break;
     }
@@ -27,7 +27,7 @@ export function howManyImagesLoaded() {
   let imgs = document.images;
   let howMany = 0;
   for (const img of imgs) {
-    if(img.complete) {
+    if (img.complete) {
       howMany++;
     }
   }
@@ -36,7 +36,7 @@ export function howManyImagesLoaded() {
 
 
 
-for(let i = 1; i <= 16; i++) {
+for (let i = 1; i <= 16; i++) {
   const img = document.getElementById("fruit" + i);
   fruits.push(img);
 }
