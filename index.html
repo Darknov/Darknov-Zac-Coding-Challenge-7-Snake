@@ -1,14 +1,17 @@
 <!DOCTYPE html>
+
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./css/styles.css">
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
 <html>
+
 <body>
   <div class="user">
     <div class="userElement">
-      <label class="score" id="score">0</label> / 
+      <label class="score" id="score">0</label> /
       <label class="score" id="highscore">0</label>
     </div>
   </div>
@@ -16,13 +19,13 @@
     <canvas id="myCanvas" width="1024" height="768"></canvas>
     <div id="startButtons">
       <button id="startButton" class="startButton">START THE GAME: MODE 0</button>
-      <button id="startButton1" class="startButton">START THE GAME: MODE 1</button> 
+      <button id="startButton1" class="startButton">START THE GAME: MODE 1</button>
       <label id="instruction">MODE 0: WATCH OUT FOR THE REST OF BODY<br>
-      MODE 1: WATCH OUT FOR EATING THE TAIL<br>
-      ENJOY!</label>
+        MODE 1: WATCH OUT FOR EATING THE TAIL<br>
+        ENJOY!</label>
     </div>
     <div id="leftCurtain"></div>
-    
+
   </div>
   <div class="image">
     <img id="box" src="./assets/box.png">
@@ -57,7 +60,8 @@
     <audio id="eat2" src="./sounds/eat_02.ogg"></audio>
     <audio id="eat3" src="./sounds/eat_02.ogg"></audio>
     <audio id="hit" src="./sounds/hit.ogg"></audio>
-  </div>	   
+  </div>
   <script src="./scripts/main.js" type="module"></script>
 </body>
+
 </html>
